@@ -22,14 +22,14 @@ This project was developed in C# in Visual Studio 2019 using Windows Forms.
 ## FileList
 ### Form1.cs: Contains functions for actions taken on the GUI.
 #### Relevant Functions
-- StepIntoDirectory(String _name): Steps into a directory with a chosen name.
-- StepOutofDirectory(): Steps out of a directory to one level of depth up.
-- UpdateAllDirectories(): Updates the Virtual File System display with all current directories and files in the system.
-- createDirectory_Button_Click(): Creates a Directory in the current directory with a chosen name.
-- Create_File_Button_Click(): Creates a File in the current directory with a chosen name.
-- openFile_Button_Click(): Opens a File with a selected name to be edited.
-- filecontent_richTextBox_TextChanged(): Edits the content of a selected File and saves it.
-- deleteFile_button_Click(): Deletes a selected file.
+- [StepIntoDirectory(String _name)](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L223): Steps into a directory with a chosen name.
+- [StepOutofDirectory()](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L265): Steps out of a directory to one level of depth up.
+- [UpdateAllDirectories()](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L174): Updates the Virtual File System display with all current directories and files in the system.
+- [createDirectory_Button_Click()](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L56): Creates a Directory in the current directory with a chosen name.
+- [Create_File_Button_Click()](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L89): Creates a File in the current directory with a chosen name.
+- [openFile_Button_Click()](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L124): Opens a File with a selected name to be edited.
+- [filecontent_richTextBox_TextChanged()](https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L138): Edits the content of a selected File and saves it.
+- [deleteFile_button_Click()]((https://github.com/NBarnesL/Virtual-File-System/blob/084fb0e8d03edea2da4cb071a6360db93aa57820/cs471-project3/Form1.cs#L152): Deletes a selected file.
 
 ### Directory.cs: Contains the *Directory* class that mimics a directory. Contains two linked lists of directories and files.
 #### Relevant Functions
