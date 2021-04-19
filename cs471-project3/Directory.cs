@@ -8,9 +8,9 @@ namespace cs471_project3
     {
         private int Dir_ID;
         private String name;
+        private int depth;
 
         public LinkedList<Directory> Directory_List = new LinkedList<Directory>();
-        public LinkedListNode<Directory> directory_Node;
         public LinkedList<File> File_List = new LinkedList<File>();
 
         public Directory()
@@ -18,10 +18,12 @@ namespace cs471_project3
 
         }
 
-        public Directory(int _id, String _name)
+        public Directory(int _id, String _name, int _depth)
         {
             Dir_ID = _id;
             name = _name;
+            depth = _depth;
+            depth++;
         }
 
         public int GetDir_ID()
@@ -32,6 +34,11 @@ namespace cs471_project3
         public String GetName()
         {
             return name;
+        }
+
+        public void setDepth(int _depth)
+        {
+            depth = _depth;
         }
 
         public void AddDirectory(Directory d)
@@ -80,7 +87,7 @@ namespace cs471_project3
         {
             LinkedListNode<Directory> dnode = Directory_List.First;
             LinkedListNode<File> fnode = File_List.First;
-            String content = "";
+            String content = "Directory:" + name +"\n";
 
             while (dnode != null)
             {
@@ -90,15 +97,59 @@ namespace cs471_project3
 
             while (fnode != null)
             {
-                content += "f\t" + fnode.Value.GetContent() + ".txt\n";
+                content += "f\t" + fnode.Value.GetName() + ".txt\n";
                 fnode = fnode.Next;
             }
 
 
             return content;
         }
+        public String DisplayAllContent()
+        {
+            LinkedListNode<Directory> dnode = Directory_List.First;
+            LinkedListNode<File> fnode = File_List.First;
+            String content = "";
 
+            while (dnode != null)
+            {
+                if (depth > 0)
+                {
+                    for (int i = 0; i < depth; i++)
+                    {
+                        content += "-";
+                    }
+                    content += "/";
 
+                }
+                content += "d" + dnode.Value.GetDir_ID() + "\t" + dnode.Value.GetName() + "\n";
+                if (dnode.Value.DisplayContent().Length > 0)
+                {
 
+                    content += dnode.Value.DisplayAllContent();
+
+                }
+                dnode = dnode.Next;
+            }
+
+            while (fnode != null)
+            {
+                if (depth > 0)
+                {
+                    for (int i = 0; i < depth; i++)
+                    {
+                        content += "-";
+                    }
+                    content += "/";
+
+                }
+                content += "f\t" + fnode.Value.GetName() + ".txt\n";
+                fnode = fnode.Next;
+            }
+
+            return content;
+
+        }
     }
+
+
 }

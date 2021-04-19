@@ -12,8 +12,7 @@ namespace cs471_project3
 {
     public partial class Form1 : Form
     {
-        private Directory rootDirectory = new Directory();
-        LinkedListNode<Directory> rootnode;
+        private Directory rootDirectory = new Directory(0,"root",-1);
         private Directory prevLv1 = new Directory();
         LinkedListNode<Directory> lv1node;
         private Directory prevLv2 = new Directory();
@@ -36,7 +35,16 @@ namespace cs471_project3
 
         private void stepInto_button_Click(object sender, EventArgs e)
         {
-            StepIntoDirectory(Convert.ToInt32(stepInto_TextBox.Text));
+            try
+            { 
+                StepIntoDirectory(stepInto_TextBox.Text); 
+            }
+            catch
+            {
+                MessageBox.Show("Directory does not exist", "Wait a second!");
+            }
+                
+           
             DisplayCurrentDirectory();
         }
         private void stepOut_button_Click(object sender, EventArgs e)
@@ -47,10 +55,111 @@ namespace cs471_project3
 
         private void createDirectory_Button_Click(object sender, EventArgs e)
         {
-            if(depth>0 &&depth<4)
+            LinkedListNode<Directory> node = currentDirectory.Directory_List.First;
+            bool exists = false;
+            if (depth > 0 && depth < 4)
             {
-                currentDirectory.AddDirectory(new Directory(directoryCount,"gamign"));
-                directoryCount++;
+                while (node != null)
+                {
+                    if (directoryName_textBox.Text == node.Value.GetName())
+                    {
+                        exists = true;
+                        break;
+                    }
+                    node = node.Next;
+                }
+                if(directoryName_textBox.Text.Length>0 && exists == false)
+                {
+                    currentDirectory.AddDirectory(new Directory(directoryCount, directoryName_textBox.Text, depth));
+                    directoryCount++;
+                }
+                else if(directoryName_textBox.Text.Length ==0)
+                {
+                    MessageBox.Show("Please Enter a Directory Name", "Wait a second!");
+                }
+                else
+                {
+                    MessageBox.Show("Directory Already Exists", "Wait a second!");
+                }
+                
+            }
+            DisplayCurrentDirectory();
+        }
+
+        private void Create_File_Button_Click(object sender, EventArgs e)
+        {
+            LinkedListNode<File> node = currentDirectory.File_List.First;
+            bool exists = false;
+            if (filename_Text_Box.Text.Length>0)
+            {
+                
+                while (node != null)
+                {
+                    if (filename_Text_Box.Text == node.Value.GetName())
+                    {
+                        //node.Value.SetContent(filecontent_richTextBox.Text);
+                        exists = true;
+                        break;
+                    }
+                    node = node.Next;
+                }
+
+                if (depth > 0 && exists == false)
+                {
+                    currentDirectory.AddFile(new File(filename_Text_Box.Text, filecontent_TextBox.Text, depth));
+                }
+                else
+                {
+                    MessageBox.Show("File Already Exists", "Wait a second!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a filename", "Wait a second!");
+            }
+           
+            DisplayCurrentDirectory();
+        }
+
+        private void openFile_Button_Click(object sender, EventArgs e)
+        {
+            LinkedListNode<File> node = currentDirectory.File_List.First;
+            while (node != null)
+            {
+                if (openfile_textBox.Text == node.Value.GetName())
+                {
+                    filecontent_richTextBox.Text = node.Value.GetContent();
+                    break;
+                }
+                node = node.Next;
+            }
+        }
+
+        private void filecontent_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            LinkedListNode<File> node = currentDirectory.File_List.First;
+            while (node != null)
+            {
+                if (openfile_textBox.Text == node.Value.GetName() && filecontent_richTextBox.Text.Length <250)
+                {
+                    node.Value.SetContent(filecontent_richTextBox.Text);
+                    break;
+                }
+                node = node.Next;
+            }
+        }
+
+        private void deleteFile_button_Click(object sender, EventArgs e)
+        {
+            LinkedListNode<File> node = currentDirectory.File_List.First;
+            while (node != null)
+            {
+                if (openfile_textBox.Text == node.Value.GetName())
+                {
+                    currentDirectory.File_List.Remove(node);
+                    break;
+                }
+                node = node.Next;
             }
             DisplayCurrentDirectory();
         }
@@ -58,52 +167,66 @@ namespace cs471_project3
         private void DisplayCurrentDirectory()
         {
             CurrentDirectoryView_RichTextBox.Text = currentDirectory.DisplayContent();
+            UpdateAllDirectories();
+            fullfilesystemview_richTextBox.Text = rootDirectory.DisplayAllContent();
+        }
+
+        private void UpdateAllDirectories()
+        {
+
+            int depthcount = depth;
+            Directory tempcurrent = currentDirectory;
+
+            while (depthcount>0)
+            {
+                switch (depthcount)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        lv1node.Value = tempcurrent;
+                        tempcurrent = prevLv1;
+                        depthcount--;
+                        break;
+                    case 2:
+                        lv2node.Value = tempcurrent;
+                        tempcurrent = prevLv2;
+                        depthcount--;
+                        break;
+                    case 3:
+                        lv3node.Value = tempcurrent;
+                        tempcurrent = prevLv3;
+                        depthcount--;
+                        break;
+                    case 4:
+                        lv4node.Value = tempcurrent;
+                        tempcurrent = prevLv4;
+                        depthcount--;
+                        break;
+                    default:
+                        //depth exceeded, shouldnt happen
+                        break;
+                }
+            }
+
         }
 
         private void InitializeDirectories()
         {
-            rootDirectory.AddDirectory(new Directory(1, "a"));
-            rootDirectory.AddDirectory(new Directory(2, "b"));
-            rootDirectory.AddDirectory(new Directory(3, "c"));
+            rootDirectory.AddDirectory(new Directory(1, "a",depth));
+            rootDirectory.AddDirectory(new Directory(2, "b",depth));
+            rootDirectory.AddDirectory(new Directory(3, "c",depth));
             currentDirectory = rootDirectory;
         }
-        private void GoToRoot()
-        {
-            currentDirectory = rootDirectory;
-            DisplayCurrentDirectory();
-        }
 
-        private void GoToPrevious()
-        {
-            switch (depth)
-            {
-                case 0:
-                    break;
-                case 1:
-                    currentDirectory = prevLv1;
-                    break;
-                case 2:
-                    currentDirectory = prevLv2;
-                    break;
-                case 3:
-                    currentDirectory = prevLv3;
-                    break;
-                case 4:
-                    currentDirectory = prevLv4;
-                    break;
-                   
-            }
-            DisplayCurrentDirectory();
 
-        }
-
-        private void StepIntoDirectory(int _id)
+        private void StepIntoDirectory(String _name)
         {
             LinkedListNode<Directory> node = currentDirectory.Directory_List.First;
 
             while (node != null)
             {
-                if (_id == node.Value.GetDir_ID())
+                if (_name == node.Value.GetName())
                 {
                     switch (depth)
                     {
@@ -175,6 +298,6 @@ namespace cs471_project3
             DisplayCurrentDirectory();
         }
 
-        
+
     }
 }

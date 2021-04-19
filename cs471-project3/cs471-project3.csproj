@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>cs471_project3</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>critstar.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
