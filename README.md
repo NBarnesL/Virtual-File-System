@@ -38,7 +38,7 @@ This project was developed in C# in Visual Studio 2019 using Windows Forms.
 - AddFile(File _f): Adds a file to the file list.
 - RemoveFile(String _name): Removes a file by name.
 - DisplayContent(): Displays all the directories and files in the directory. Displayed in the Local Directory View
-- DisplayAllContent(): Recursive function that displays all directories and files at all levels of depth. Layers of depth are denoted by any number of "-".
+- [DisplayAllContent()](https://github.com/NBarnesL/Virtual-File-System/blob/c541e6e11313ca48384641260b7f1c67c97ae027/cs471-project3/Directory.cs#L107): Recursive function that displays all directories and files at all levels of depth. Layers of depth are denoted by any number of "-".
 
 ### File.cs: Contains the *File* class that mimics a file. Contains a content string and is identified by name.
 
