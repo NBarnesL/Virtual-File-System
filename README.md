@@ -20,8 +20,8 @@ This project was developed in C# in Visual Studio 2019 using Windows Forms.
 
 
 ## FileList
-Form1.cs: Contains functions for actions taken on the GUI.
-### Relevant Functions
+### Form1.cs: Contains functions for actions taken on the GUI.
+##### Relevant Functions
 - StepIntoDirectory(String _name): Steps into a directory with a chosen name.
 - StepOutofDirectory(): Steps out of a directory to one level of depth up.
 - UpdateAllDirectories(): Updates the Virtual File System display with all current directories and files in the system.
@@ -31,8 +31,8 @@ Form1.cs: Contains functions for actions taken on the GUI.
 - filecontent_richTextBox_TextChanged(): Edits the content of a selected File and saves it.
 - deleteFile_button_Click(): Deletes a selected file.
 
-Directory.cs: Contains the *Directory* class that mimics a directory. Contains two linked lists of directories and files.
-### Relevant Functions
+### Directory.cs: Contains the *Directory* class that mimics a directory. Contains two linked lists of directories and files.
+##### Relevant Functions
 - AddDirectory(Directory d): Adds a directory to the directory list. 
 - RemoveDirectory(int _id): Removes a directory by its ID. Implemented but not referenced.
 - AddFile(File _f): Adds a file to the file list.
@@ -40,9 +40,9 @@ Directory.cs: Contains the *Directory* class that mimics a directory. Contains t
 - DisplayContent(): Displays all the directories and files in the directory. Displayed in the Local Directory View
 - DisplayAllContent(): Recursive function that displays all directories and files at all levels of depth. Layers of depth are denoted by any number of "-".
 
-File.cs: Contains the *File* class that mimics a file. Contains a content string and is identified by name.
+### File.cs: Contains the *File* class that mimics a file. Contains a content string and is identified by name.
 
-Form1.Designer.cs: Windows form Layout.
+### Form1.Designer.cs: Windows form Layout.
 
-Program.cs: Contains the main function that drives the whole program. Its kind of small since this is OOP.
+### Program.cs: Contains the main function that drives the whole program. Its kind of small since this is OOP.
 
