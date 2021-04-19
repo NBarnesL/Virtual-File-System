@@ -21,7 +21,7 @@ This project was developed in C# in Visual Studio 2019 using Windows Forms.
 
 ## FileList
 Form1.cs: Contains functions for actions taken on the GUI.
-###Relevant Functions
+### Relevant Functions
 - StepIntoDirectory(String _name): Steps into a directory with a chosen name.
 - StepOutofDirectory(): Steps out of a directory to one level of depth up.
 - UpdateAllDirectories(): Updates the Virtual File System display with all current directories and files in the system.
@@ -32,7 +32,7 @@ Form1.cs: Contains functions for actions taken on the GUI.
 - deleteFile_button_Click(): Deletes a selected file.
 
 Directory.cs: Contains the *Directory* class that mimics a directory. Contains two linked lists of directories and files.
-###Relevant Functions
+### Relevant Functions
 - AddDirectory(Directory d): Adds a directory to the directory list. 
 - RemoveDirectory(int _id): Removes a directory by its ID. Implemented but not referenced.
 - AddFile(File _f): Adds a file to the file list.
